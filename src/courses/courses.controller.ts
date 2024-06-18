@@ -9,6 +9,9 @@ import {
     Put,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
+import { CreateCourseDto } from './dto/create-course.dto';
+
+
 
 @Controller('courses')
 export class CoursesController {
@@ -24,13 +27,13 @@ export class CoursesController {
     }
 
     @Post()
-    create(@Body() body) {
-        return this.courseService.create(body);
+    create(@Body() createCourseDto: CreateCourseDto) {
+        return this.courseService.create(createCourseDto);
     }
 
     @Put(':id')
-    update(@Param('id') id: number, @Body() body) {
-        return this.courseService.update(+id, body);
+    update(@Param('id') id: number, @Body() createCourseDto: CreateCourseDto) {
+        return this.courseService.update(+id, createCourseDto);
     }
 
     @HttpCode(204)
