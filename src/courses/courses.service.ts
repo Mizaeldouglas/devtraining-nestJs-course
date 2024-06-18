@@ -16,7 +16,7 @@ export class CoursesService {
     }
 
     findOne(id: number) {
-        const course = this.courses.find((course) => course.id === +id);
+        const course = this.courses.find((course) => course.id === id);
         if (!course) {
             throw new HttpException(`Course with id ${id} not found`, HttpStatus.NOT_FOUND);
         }
@@ -31,7 +31,8 @@ export class CoursesService {
             description: createCourseDto.description,
             tags: createCourseDto.tags,
         };
-        return this.courses.push(newCourse);
+        this.courses.push(newCourse)
+        return createCourseDto;
     }
 
     update(id: number, updateCourseDto: CreateCourseDto) {
@@ -46,7 +47,7 @@ export class CoursesService {
     }
 
     remove(id: number) {
-        const index = this.courses.findIndex(course => course.id === +id);
+        const index = this.courses.findIndex(course => course.id === id);
         if (index >= 0) {
             this.courses.splice(index, 1);
         }
